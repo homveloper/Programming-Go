@@ -49,7 +49,7 @@ func Noise2D(x, y float32) float32 {
 	return SmoothInterp(low, high, yFrac)
 }
 
-func Perlin2D(x, yy, frequency float32, depth int) float32 {
+func Perlin2D(x, y, frequency float32, depth int) float32 {
 	xa := x * frequency
 	ya := y * frequency
 	amplitude := float32(1.0)
@@ -118,7 +118,7 @@ func main() {
 			bUpdate = true
 		}
 
-		if rl.IsKeyPressed(rl.KeyN) {
+		if rl.IsKeyPressed(rl.KeyM) {
 			scale -= 0.1
 			bUpdate = true
 		}
