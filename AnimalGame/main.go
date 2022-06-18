@@ -1,6 +1,8 @@
 package main
 
-import rl "github.com/gen2brain/raylib-go/raylib"
+import (
+	rl "github.com/gen2brain/raylib-go/raylib"
+)
 
 const (
 	ScreenWidth  = 800
@@ -9,15 +11,18 @@ const (
 
 var (
 	bIsRunning      = true
-	BackgroundColor = rl.NewColor(147, 211, 196, 255)
+	BackgroundColor = rl.Color{0x89, 0x00, 0xf2, 0xff}
+	FrameCount      int
 
-	GrassSprite  rl.Texture2D
-	PlayerSprite rl.Texture2D
+	GrassSprite rl.Texture2D
 
-	PlayerSrc  rl.Rectangle
-	PlayerDest rl.Rectangle
-
-	PlayerSpeed float32 = 2.0
+	PlayerSprite    rl.Texture2D
+	PlayerSrc       rl.Rectangle
+	PlayerDest      rl.Rectangle
+	PlayerSpeed     float32 = 2.0
+	bIsMoving       bool
+	PlayerDirection int
+	PlayerFrame     int
 
 	bIsBGMPaused    = false
 	BackgroundSound rl.Music
@@ -56,19 +61,23 @@ func Quit() {
 
 func Input() {
 	if rl.IsKeyDown(rl.KeyW) || rl.IsKeyDown(rl.KeyUp) {
-		PlayerDest.Y -= PlayerSpeed
+		bIsMoving = true
+		PlayerDirection = 1
 	}
 
 	if rl.IsKeyDown(rl.KeyA) || rl.IsKeyDown(rl.KeyLeft) {
-		PlayerDest.X -= PlayerSpeed
+		bIsMoving = true
+		PlayerDirection = 2
 	}
 
 	if rl.IsKeyDown(rl.KeyS) || rl.IsKeyDown(rl.KeyDown) {
-		PlayerDest.Y += PlayerSpeed
+		bIsMoving = true
+		PlayerDirection = 0
 	}
 
 	if rl.IsKeyDown(rl.KeyD) || rl.IsKeyDown(rl.KeyRight) {
-		PlayerDest.X += PlayerSpeed
+		bIsMoving = true
+		PlayerDirection = 3
 	}
 
 	if rl.IsKeyPressed(rl.KeyQ) {
@@ -84,6 +93,31 @@ func DrawScene() {
 func Update() {
 	bIsRunning = !rl.WindowShouldClose()
 
+	if bIsMoving {
+		if PlayerDirection == 0 {
+			PlayerDest.Y += PlayerSpeed
+		}
+		if PlayerDirection == 1 {
+			PlayerDest.Y -= PlayerSpeed
+		}
+		if PlayerDirection == 2 {
+			PlayerDest.X -= PlayerSpeed
+		}
+		if PlayerDirection == 3 {
+			PlayerDest.X += PlayerSpeed
+		}
+
+		if FrameCount%10 == 1 {
+			PlayerFrame++
+		}
+	}
+
+	FrameCount++
+	PlayerFrame = PlayerFrame % 3
+
+	PlayerSrc.X = PlayerSrc.Width * float32(PlayerFrame)
+	PlayerSrc.Y = PlayerSrc.Height * float32(PlayerDirection)
+
 	rl.UpdateMusicStream(BackgroundSound)
 	if bIsBGMPaused {
 		rl.PauseMusicStream(BackgroundSound)
@@ -92,6 +126,8 @@ func Update() {
 	}
 
 	Camera.Target = rl.NewVector2(PlayerDest.X /*-ScreenWidth/2*/, PlayerDest.Y /*-ScreenHeight/2*/)
+	bIsMoving = false
+	// PlayerDirection = 0
 }
 
 func Render() {
