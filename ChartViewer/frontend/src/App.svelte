@@ -1,83 +1,25 @@
-<script lang="ts">
-  import logo from './assets/images/logo-universal.png'
-  import {Greet} from '../wailsjs/go/main/App.js'
-  import type {main} from '../wailsjs/go/models'
+<script>
+	import {Sheet,Toolbar} from "Svelte-sheets"
+	let sheetNames;
+	let sheets;
+	let active;
+	let data;
+	let columns;
+	let mergeCells;
+	let style;
 
-  let resultText : string = "adwdlo world";
-  let name : string;
-  let Person : main.FPerson;
-
-  function greet(): void{
-    Person.name = name;
-    Person.age = 26;
-  }
+	$: {
+	data = sheets[active].data;
+	columns = sheets[active].columns;
+	mergeCells = sheets[active].mergeCells;
+	style = sheets[active].style;
+	}
 </script>
 
 <main>
-  <img alt="Wails logo" id="logo" src="{logo}">
-  <div class="result" id="result">{Greet(Person)}</div>
-
-  <div class="input-box" id="input">
-    <input autocomplete="off" bind:value={name} class="input" id="name" type="text"/>
-    <button class="btn" on:click={() => greet()}>{name}</button>
-  </div>
+	<Toolbar bind:sheetNames bind:sheets bind:active />
+	<Sheet style={style} mergeCells={mergeCells} columns={columns} data={data} />
 </main>
 
 <style>
-
-  #logo {
-    display: block;
-    width: 50%;
-    height: 50%;
-    margin: auto;
-    padding: 10% 0 0;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    background-origin: content-box;
-  }
-
-  .result {
-    height: 20px;
-    line-height: 20px;
-    margin: 1.5rem auto;
-  }
-
-  .input-box .btn {
-    width: 60px;
-    height: 30px;
-    line-height: 30px;
-    border-radius: 3px;
-    border: none;
-    margin: 0 0 0 20px;
-    padding: 0 8px;
-    cursor: pointer;
-  }
-
-  .input-box .btn:hover {
-    background-image: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
-    color: #333333;
-  }
-
-  .input-box .input {
-    border: none;
-    border-radius: 3px;
-    outline: none;
-    height: 30px;
-    line-height: 30px;
-    padding: 0 10px;
-    background-color: rgba(240, 240, 240, 1);
-    -webkit-font-smoothing: antialiased;
-  }
-
-  .input-box .input:hover {
-    border: none;
-    background-color: rgba(255, 255, 255, 1);
-  }
-
-  .input-box .input:focus {
-    border: none;
-    background-color: rgba(255, 255, 255, 1);
-  }
-
 </style>

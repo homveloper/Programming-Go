@@ -22,6 +22,6 @@ func (a *App) startup(ctx context.Context) {
 }
 
 // Greet returns a greeting for the given name
-func (a *App) Greet(Person FPerson) string {
-	return fmt.Sprintf("Hello %s (Age: %d)!", Person.Name, Person.Age)
+func (a *App) Greet(name string) string {
+	return fmt.Sprintf("Hello %s, It's show time!", name)
 }
