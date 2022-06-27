@@ -44,7 +44,6 @@ func Init() {
 func Quit() {
 	// Close Loaded Asset
 	rl.UnloadTexture(Player.m_Sprite)
-
 	rl.CloseWindow()
 }
 

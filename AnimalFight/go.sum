@@ -2,6 +2,9 @@ github.com/davecgh/go-spew v1.1.0 h1:ZDRjVQ15GmhC3fiQ8ni8+OwkZQO4DARzQgrnXU1Liz8
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/disintegration/imaging v1.6.2 h1:w1LecBlG2Lnp8B3jk5zSuNqd7b4DXhcjwek1ei82L+c=
 github.com/disintegration/imaging v1.6.2/go.mod h1:44/5580QXChDfwIclfc/PCwrr44amcmDAg8hxG0Ewe4=
+github.com/gen2brain/raylib-go/physics v0.0.0-20220601234331-25dea46fc2d9 h1:hfzokjGnSsYc9DX30If3xDirgbW6JICoOXSPHiOFxBE=
+github.com/gen2brain/raylib-go/physics v0.0.0-20220601234331-25dea46fc2d9/go.mod h1:gFu3Aw210P6L2qVHxHd0dPXLOa1ggUPxVjBPCJPwxBA=
+github.com/gen2brain/raylib-go/raylib v0.0.0-20211111173445-914ca1ffdc4d/go.mod h1:+NbsqGlEQqGqrsgJFF5Yj2dkvn0ML2SQb8RqM2hJsPU=
 github.com/gen2brain/raylib-go/raylib v0.0.0-20220601234331-25dea46fc2d9 h1:27koIsxg4DkkJ5kq3zibpuVSGln1f0YOGQTTuEsuAsY=
 github.com/gen2brain/raylib-go/raylib v0.0.0-20220601234331-25dea46fc2d9/go.mod h1:+NbsqGlEQqGqrsgJFF5Yj2dkvn0ML2SQb8RqM2hJsPU=
 github.com/lafriks/go-tiled v0.7.0 h1:xb1iVYtPpjpHx9i/LjqHwoS2xdfrihCsFRKOFn7fOBU=
