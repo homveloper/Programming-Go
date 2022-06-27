@@ -1,83 +1,38 @@
+<svelte:head>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.15.5/xlsx.full.min.js"></script>
+
+</svelte:head>
+
 <script lang="ts">
-  import logo from './assets/images/logo-universal.png'
-  import {Greet} from '../wailsjs/go/main/App.js'
-  import type {main} from '../wailsjs/go/models'
+	import {OpenFile} from '../wailsjs/go/main/App'
+	import Handsontable from './Handsontable.svelte'
 
-  let resultText : string = "adwdlo world";
-  let name : string;
-  let Person : main.FPerson;
+	let data = [
+		['','Tesla','Volvo','Toyota','Ford'],
+		['2019','Tesla','Volvo','Toyota','Ford'],
+		['2020','Tesla','Volvo','Toyota','Ford'],
+		['2021','Tesla','Volvo','Toyota','Ford'],
+	]
 
-  function greet(): void{
-    Person.name = name;
-    Person.age = 26;
-  }
+	let header = [
+		'Year', 'A','B','C','D'
+	]
+
+	let file : FileList;
+
+	$: if (file) {
+		// Note that `files` is of type `FileList`, not an Array:
+		// https://developer.mozilla.org/en-US/docs/Web/API/FileList
+
+
+
+		OpenFile(file.item.name)
+	}
+
 </script>
 
 <main>
-  <img alt="Wails logo" id="logo" src="{logo}">
-  <div class="result" id="result">{Greet(Person)}</div>
-
-  <div class="input-box" id="input">
-    <input autocomplete="off" bind:value={name} class="input" id="name" type="text"/>
-    <button class="btn" on:click={() => greet()}>{name}</button>
-  </div>
+	<label>Grid is here:</label>
+	<Handsontable data={data} header={header}/>
+	<input bind:files={file} id="avatar" name="avatar" type="file"/>
 </main>
-
-<style>
-
-  #logo {
-    display: block;
-    width: 50%;
-    height: 50%;
-    margin: auto;
-    padding: 10% 0 0;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    background-origin: content-box;
-  }
-
-  .result {
-    height: 20px;
-    line-height: 20px;
-    margin: 1.5rem auto;
-  }
-
-  .input-box .btn {
-    width: 60px;
-    height: 30px;
-    line-height: 30px;
-    border-radius: 3px;
-    border: none;
-    margin: 0 0 0 20px;
-    padding: 0 8px;
-    cursor: pointer;
-  }
-
-  .input-box .btn:hover {
-    background-image: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
-    color: #333333;
-  }
-
-  .input-box .input {
-    border: none;
-    border-radius: 3px;
-    outline: none;
-    height: 30px;
-    line-height: 30px;
-    padding: 0 10px;
-    background-color: rgba(240, 240, 240, 1);
-    -webkit-font-smoothing: antialiased;
-  }
-
-  .input-box .input:hover {
-    border: none;
-    background-color: rgba(255, 255, 255, 1);
-  }
-
-  .input-box .input:focus {
-    border: none;
-    background-color: rgba(255, 255, 255, 1);
-  }
-
-</style>

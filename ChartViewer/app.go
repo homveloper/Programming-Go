@@ -3,6 +3,8 @@ package main
 import (
 	"context"
 	"fmt"
+
+	"github.com/xuri/excelize/v2"
 )
 
 // App struct
@@ -21,7 +23,12 @@ func (a *App) startup(ctx context.Context) {
 	a.ctx = ctx
 }
 
-// Greet returns a greeting for the given name
-func (a *App) Greet(Person FPerson) string {
-	return fmt.Sprintf("Hello %s (Age: %d)!", Person.Name, Person.Age)
+func (a *App) OpenFile(filePath string) {
+	file, err := excelize.OpenFile(filePath)
+
+	if err != nil {
+
+	}
+
+	fmt.Println(file)
 }
